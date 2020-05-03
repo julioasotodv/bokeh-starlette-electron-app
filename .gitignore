@@ -1,5 +1,6 @@
 node_modules/*
 .vscode/*
+package-lock.json
 *.spec
 starlette_bokeh_server/build/*
 starlette_bokeh_server_dist/*
