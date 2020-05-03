@@ -2,13 +2,13 @@
 
 rm -rf asgi.spec
 rm -rf build
-rm -rf python_server_dist
+rm -rf ../starlette_bokeh_server_dist
 
 #--onefile \
 pyinstaller \
   --windowed \
   --onedir \
-  --additional-hooks-dir hooks \
+  --additional-hooks-dir pyinstaller_extra_hooks \
   --hidden-import starlette.applications \
   --hidden-import starlette.templating \
   --hidden-import starlette.staticfiles \
@@ -29,7 +29,7 @@ pyinstaller \
   --hidden-import uvicorn.lifespan \
   --hidden-import uvicorn.lifespan.on \
   --hidden-import uvicorn.lifespan.off \
-  --distpath python_server_dist \
+  --distpath ../starlette_bokeh_server_dist \
   --add-data starlette_bokeh_server.py:. \
   --add-data static:static \
   --add-data templates:templates \

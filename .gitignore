@@ -1,5 +1,6 @@
 node_modules/*
 .vscode/*
 *.spec
-server/build/*
-server/python_server_dist/*
+starlette_bokeh_server/build/*
+starlette_bokeh_server_dist/*
+dashboard-linux-x64/*

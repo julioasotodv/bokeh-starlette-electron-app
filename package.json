@@ -12,7 +12,7 @@
     "portfinder": "^1.0.26"
   },
   "devDependencies": {
-    "electron": "^1.7.6",
-    "electron-packager": "^9.0.1"
+    "electron": "^8.2.5",
+    "electron-packager": "^14.2.1"
   }
 }
