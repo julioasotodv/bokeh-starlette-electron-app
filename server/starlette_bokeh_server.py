@@ -11,7 +11,7 @@ import os
 from bokeh.layouts import column
 from bokeh.models import ColumnDataSource, Slider, Paragraph
 from bokeh.plotting import figure
-from bokeh.sampledata.sea_surface_temperature import sea_surface_temperature
+#from bokeh.sampledata.sea_surface_temperature import sea_surface_temperature
 from bokeh.themes import Theme
 
 # Bokeh Server-y imports
@@ -57,6 +57,7 @@ def bkapp(curdoc):
     import time
     time.sleep(5)
 
+    """
     df = sea_surface_temperature.copy()
     source = ColumnDataSource(data=df)
 
@@ -70,10 +71,13 @@ def bkapp(curdoc):
         else:
             data = df.rolling('{0}D'.format(new)).mean()
         source.data = data
+    """
+    plot = figure()
+    plot.line(x=[1,2,3], y=[4,5,6])
     plot.sizing_mode = "stretch_both"
 
     slider = Slider(start=0, end=30, value=0, step=1, title="Smoothing by N Days")
-    slider.on_change('value', callback)
+    #slider.on_change('value', callback)
 
     paragraph = Paragraph(text="IOloop's id: %s" % str(id(bokeh_server.io_loop.asyncio_loop)))
 
@@ -131,10 +135,6 @@ bokeh_http.add_socket(socket)
 
 bokeh_server = BaseServer(IOLoop.current(), bokeh_tornado, bokeh_http)
 bokeh_server.start()
-
-from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware import Middleware
-
 
 # Starlette App creation
 app = Starlette(debug=True, routes=[

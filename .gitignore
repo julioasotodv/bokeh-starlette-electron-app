@@ -1,2 +1,5 @@
 node_modules/*
 .vscode/*
+*.spec
+server/build/*
+server/python_server_dist/*
