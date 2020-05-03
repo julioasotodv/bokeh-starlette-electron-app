@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mi Dashboard</title>
+    
+        <!-- Custom style for this template -->
+        <link href="../static/css/styles.css" rel="stylesheet" />
+        <link href="../static/css/loading_screen.css" rel="stylesheet" />
+        
+        <!-- Font Awesome -->
+        <script>require("@fortawesome/fontawesome-free/js/all")</script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>-->
+    </head>
+    <body>
+        <div class="loading-div">
+            <p class="loading-text">Loading...</p>
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div id="loading-screen" class="loading"></div>
+
+        <!--<script src="scripts/jquery.min.js" crossorigin="anonymous"></script>-->
+        <script>
+        var electron = require('electron');
+        window.$ = window.jQuery = require('jquery');
+        $(document).ready(function(){
+            setTimeout(function(){
+                let bokeh_port = electron.remote.getCurrentWindow().bokeh_server_port
+                window.location.replace("http://localhost:" + bokeh_port);
+            }, 5000);
+        });
+        </script>
+    </body>
+</html>

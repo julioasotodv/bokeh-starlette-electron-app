@@ -1,0 +1,25 @@
+{% block head %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Mi Dashboard</title>
+
+    <!-- Custom style for this template -->
+    {% if rendered_by_bokeh_server %}
+    <link href="/static_assets/css/styles.css" rel="stylesheet" />
+    <link href="/static_assets/css/loading_screen.css" rel="stylesheet" />
+    {% endif %}
+    {% if not rendered_by_bokeh_server %}
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/loading_screen.css" rel="stylesheet" />
+    {% endif %}
+
+    {{ bokeh_css | indent(8) if bokeh_css }}
+    
+    <!-- Font Awesome -->
+    <script>require("@fortawesome/fontawesome-free/js/all")</script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>-->
+    
+{% endblock %}

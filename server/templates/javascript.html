@@ -1,0 +1,86 @@
+{% block javascript %}
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>-->
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
+    <script>require('popper.js');</script> <!-- bootstrap dep if you are not using the bundle -->
+    <script>require('bootstrap');</script>
+    {{ bokeh_js | indent(8) if bokeh_js }}
+
+    <!-- Custom JS: sidebar-->
+    <script>
+            /*!
+            * Start Bootstrap - SB Admin v6.0.0 (https://startbootstrap.com/templates/sb-admin)
+            * Copyright 2013-2020 Start Bootstrap
+            * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
+            */
+            (function($) {
+            "use strict";
+
+            // Add active state to sidebar nav links
+            var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+                $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+                    if (this.href === path) {
+                        $(this).addClass("active");
+                    }
+                });
+
+            // Toggle the side navigation
+            $("#sidebarToggle").on("click", function(e) {
+                e.preventDefault();
+                $("body").toggleClass("sb-sidenav-toggled");
+            });
+        })(jQuery);
+    </script>
+
+    <!-- Trick to detect customer viewport -->
+    <script>
+        function viewSize() {
+            return $('#sizer').find('div:visible').data('size');
+            }
+    </script>
+
+    <!-- Change default sidebar behavior based on resizing -->
+    <script>
+        var lastWindowSize = viewSize();
+
+        $(document).ready(function(){
+            $(window).resize(function(){
+                if ((viewSize() !== "lg") && (viewSize() !== "xl")) { // If now small:
+                    $("body").removeClass("sb-sidenav-toggled");
+                } else {                                              // If now large
+                    if ((lastWindowSize !== "lg") && (lastWindowSize !== "xl")) { // Before small:
+                        $("body").addClass("sb-sidenav-toggled");
+                    } 
+                }
+                lastWindowSize = viewSize();
+            });
+        });
+    </script>
+
+    <!-- Start with the sidebar hidden -->
+    <script>
+        $(document).ready(function(){
+            if ((viewSize() !== "lg") && (viewSize() !== "xl")){
+                $("body").removeClass("sb-sidenav-toggled");
+            }
+        });
+    </script>
+
+    <!-- Loading screen while bokeh elements load-->
+    <script>
+        oldLog = console.log;
+        console.log = function (message) {
+        if(message.localeCompare('Bokeh items were rendered successfully') == 0){
+            //window.top.postMessage('show-bokeh-iframe', '*')
+            $("#cargando").hide();
+            $("#contenido").show()
+            $("#loading-screen").fadeOut(duration=1500);
+            console.log = oldLog;
+            }
+        oldLog.apply(console, arguments);
+        };
+    </script>
+
+    {{ plot_script | indent(8)}}
+
+{% endblock %}
