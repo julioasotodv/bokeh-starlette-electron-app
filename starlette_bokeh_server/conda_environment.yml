@@ -2,6 +2,7 @@ name: electron_bokeh_app
 channels:
   - conda-forge
 dependencies:
+  - setuptools<45.0.0
   - bokeh=2.0.1
   - colorcet=2.0.1
   - holoviews=1.13.2
@@ -12,4 +13,6 @@ dependencies:
   - panel=0.9.5
   - starlette=0.13.3
   - uvicorn=0.11.3
+  - pip:
+    - pyinstaller==3.6
 prefix: /home/julio/anaconda3/envs/electron_bokeh_app

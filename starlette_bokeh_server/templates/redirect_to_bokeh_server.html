@@ -29,12 +29,37 @@
         <script>
         var electron = require('electron');
         window.$ = window.jQuery = require('jquery');
+
         $(document).ready(function(){
-            setTimeout(function(){
-                let bokeh_port = electron.remote.getCurrentWindow().bokeh_server_port
-                window.location.replace("http://localhost:" + bokeh_port);
-            }, 5000);
-        });
+	        function UrlExists(url, cb){
+	        	$.ajax({
+	        		url:      url,
+	        		dataType: 'text',
+	        		type:     'GET',
+	        		complete:  function(xhr) {
+	        			if(typeof cb === 'function')
+	        				cb.apply(this, [xhr.status]);
+	        		}
+	        	});
+	        }
+
+	        let bokeh_port = electron.remote.getCurrentWindow().bokeh_server_port
+	        let bokeh_url = "http://localhost:" + bokeh_port
+
+	        function CheckPeriodicallyUrl(url){
+	        	UrlExists(bokeh_url, function(status){
+	        		if(status === 200) {
+	        			window.location.replace(url);
+	        		} else {
+                        console.log("Oooops!")
+	        			setTimeout(CheckPeriodicallyUrl, 1000, url);
+	        		}
+	        });
+	    };
+
+        console.log("Ready!")
+	    setTimeout(CheckPeriodicallyUrl, 3000, bokeh_url);
+    });
         </script>
     </body>
 </html>
