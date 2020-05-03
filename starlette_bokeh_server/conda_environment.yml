@@ -1,0 +1,15 @@
+name: electron_bokeh_app
+channels:
+  - conda-forge
+dependencies:
+  - bokeh=2.0.1
+  - colorcet=2.0.1
+  - holoviews=1.13.2
+  - hvplot=0.5.2
+  - nodejs=13.13.0
+  - numpy=1.18.1
+  - pandas=1.0.3
+  - panel=0.9.5
+  - starlette=0.13.3
+  - uvicorn=0.11.3
+prefix: /home/julio/anaconda3/envs/electron_bokeh_app
