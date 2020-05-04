@@ -71,7 +71,7 @@ let bokehPort = null
 
 portfinder.getPort(function(err, port) {
   uvicornPort = '' + port;
-  portfinder.getPort({port: parseInt(uvicornPort)+1,
+  portfinder.getPort({port: port + 1,
                       endPort: 65535}, function(err, otherport) {
     bokehPort = '' + otherport;
   })
