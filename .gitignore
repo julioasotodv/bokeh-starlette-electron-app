@@ -8,3 +8,4 @@ starlette_bokeh_server/build/*
 starlette_bokeh_server_dist/*
 dashboard-linux-x64/*
 dashboard-darwin-x64/*
+dashboard-win32-x64/*

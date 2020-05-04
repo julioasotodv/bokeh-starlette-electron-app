@@ -73,6 +73,7 @@ portfinder.getPort(function(err, port) {
   uvicornPort = '' + port
 });
 
+portfinder.basePort = portfinder.basePort + 1
 portfinder.getPort(function(err, port) {
   bokehPort = '' + port
 });
