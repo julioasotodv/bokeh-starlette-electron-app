@@ -43,20 +43,22 @@
                 });
             }
 
+            let uvicorn_port = electron.remote.getCurrentWindow().uvicorn_server_port
             let bokeh_port = electron.remote.getCurrentWindow().bokeh_server_port
+            let uvicorn_url = "http://localhost:" + uvicorn_port + "/status"
             let bokeh_url = "http://localhost:" + bokeh_port
 
-            function CheckPeriodicallyUrl(url){
-                UrlExists(bokeh_url, function(status){
+            function CheckPeriodicallyUrl(check_url, dest_url){
+                UrlExists(check_url, function(status){
                     if(status === 200) {
-                        window.location.replace(url);
+                        window.location.replace(dest_url);
                     } else {
-                        setTimeout(CheckPeriodicallyUrl, 1000, url);
+                        setTimeout(CheckPeriodicallyUrl, 1000, check_url, dest_url);
                     }
             });
         };
 
-        setTimeout(CheckPeriodicallyUrl, 3000, bokeh_url);
+        setTimeout(CheckPeriodicallyUrl, 300, uvicorn_url, bokeh_url);
     });
         </script>
     </body>

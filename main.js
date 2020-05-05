@@ -18,6 +18,7 @@ const createWindow = () => {
     slashes: true
   }))
   //mainWindow.webContents.openDevTools()
+  mainWindow.uvicorn_server_port = uvicornPort;
   mainWindow.bokeh_server_port = bokehPort;
   mainWindow.setMenu(null);
 

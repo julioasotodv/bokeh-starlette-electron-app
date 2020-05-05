@@ -7,6 +7,8 @@ except ImportError:
 import socket
 import os
 
+import numpy as np
+
 # Bokeh plotting imports
 from bokeh.layouts import column
 from bokeh.models import ColumnDataSource, Slider, Paragraph
@@ -31,6 +33,7 @@ from starlette.applications import Starlette
 from starlette.routing import Route, Mount
 from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
+from starlette.responses import JSONResponse
 
 # Tornado imports
 from tornado.httpserver import HTTPServer
@@ -54,8 +57,8 @@ templates = Jinja2Templates(directory='templates')
 
 # Bokeh Applications:
 def bkapp(curdoc):
-    import time
-    time.sleep(5)
+    #import time
+    #time.sleep(5)
 
     """
     df = sea_surface_temperature.copy()
@@ -72,16 +75,20 @@ def bkapp(curdoc):
             data = df.rolling('{0}D'.format(new)).mean()
         source.data = data
     """
-    plot = figure()
-    plot.line(x=[1,2,3], y=[4,5,6])
-    plot.sizing_mode = "stretch_both"
+    slider = pn.widgets.FloatSlider(start=-10, end=10, value=0, step=0.01, title="Alpha")
 
-    slider = Slider(start=0, end=30, value=0, step=1, title="Smoothing by N Days")
-    #slider.on_change('value', callback)
+    @pn.depends(slider.param.value)
+    def create_sine_plot(alpha):
+        plot = figure(y_range=(-15,15))
+        data = np.linspace(-10, 10, 500)
+        y = alpha * np.sin(data)
+        plot.line(x=data, y=y)
+        plot.sizing_mode = "stretch_both"
+        return plot
 
     paragraph = Paragraph(text="IOloop's id: %s" % str(id(bokeh_server.io_loop.asyncio_loop)))
 
-    row = pn.Row(slider, plot, name="chart_1")
+    row = pn.Column(slider, create_sine_plot, name="chart_1")
     row.sizing_mode = "stretch_both"
     row.server_doc(curdoc)
 
@@ -115,6 +122,9 @@ async def redirect_bokeh(request):
                                       "rendered_by_bokeh_server": False}
                                       )
 
+async def server_status(request):
+    return JSONResponse({"status": "OK"})
+
 
 # Bokeh Server configuration and startup:
 #
@@ -140,6 +150,7 @@ bokeh_server.start()
 app = Starlette(debug=True, routes=[
     Route('/', endpoint=homepage, name='homepage_url'),
     Mount('/static', StaticFiles(directory='static'), name='static'),
-    Route('/bokeh', endpoint=redirect_bokeh, name='bokeh_page_url')
+    Route('/bokeh', endpoint=redirect_bokeh, name='bokeh_page_url'),
+    Route('/status', endpoint=server_status, name="get_status")
     ]
 )
