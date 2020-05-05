@@ -15,16 +15,8 @@ if [ "$(uname)" == "Darwin" ]; then
   cp icon/icon.png icon/icon.iconset/icon_512x512@2x.png
   iconutil -c icns icon/icon.iconset
   rm -r icon/icon.iconset
-  ICON="icon/icon.icns"
   echo "Icon created."
-else
-  ICON="icon/icon.ico"
 fi
-    
 
-./node_modules/.bin/electron-packager . \
-  --overwrite \
-  --ignore="starlette_bokeh_server$" \
-  --ignore="asgi.app$" \
-  --icon=${ICON}
+npm run make
 
