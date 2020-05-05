@@ -1,8 +1,17 @@
 
+const icon_orig_path = "./icon/icon.png"
 let icon_path = null
 
 if (process.platform !== 'darwin'){
+  const fs = require('fs')
+  const pngToIco = require('png-to-ico')
+  pngToIco(icon_orig_path)
+    .then(buf => {
+      fs.writeFileSync('./icon/icon.ico', buf);
+    })
+    .catch(console.error);
     icon_path="./icon/icon.ico"
+
 } else {
     icon_path="./icon/icon.icns"
 }
