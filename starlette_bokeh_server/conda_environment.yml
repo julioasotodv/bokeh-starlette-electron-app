@@ -13,6 +13,7 @@ dependencies:
   - panel=0.9.5
   - starlette=0.13.3
   - uvicorn=0.11.3
+  - pip
   - pip:
     - pyinstaller==3.6
 prefix: /home/julio/anaconda3/envs/electron_bokeh_app
