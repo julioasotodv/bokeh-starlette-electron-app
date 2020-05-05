@@ -23,7 +23,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
     "@electron-forge/maker-zip": "^6.0.0-beta.51",
     "electron": "^8.2.5",
-    "png-to-ico": "^2.1.0",
+    "png-to-ico": "^2.1.0"
   },
   "config": {
     "forge": "./forge.config.js"
