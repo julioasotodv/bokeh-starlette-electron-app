@@ -3,11 +3,28 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 
+app.allowRendererProcessReuse = true // As false is deprecated. However, this
+                                     // doesn't help with the "white flash" shown
+                                     // before the bokeh document, as it only
+                                     // reuses renderer processes in the same
+                                     // page (host:port)
+
+const iconPath = require("url").format({
+  pathname: path.join(__dirname, "icon", "icon.png"),
+  protocol: "file:",
+  slashes: true
+})
+
+const iconImage = electron.nativeImage.createFromPath(iconPath)
+
 
 let mainWindow = null
 const createWindow = () => {
   mainWindow = new BrowserWindow({width: 1200, 
                                   height: 800,
+                                  //icon: iconImage, // TODO: test in windows and mac
+                                  backgroundColor: "#000000",
+                                  show: false,
                                   webPreferences: {
                                     nodeIntegration: true
                                   }})
@@ -22,6 +39,9 @@ const createWindow = () => {
   mainWindow.bokeh_server_port = bokehPort;
   mainWindow.setMenu(null);
 
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show()
+  })
   mainWindow.on('closed', () => {
     mainWindow = null
   })
