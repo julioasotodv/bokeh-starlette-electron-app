@@ -4,7 +4,7 @@ asar: false
 files:
   - "**/*"
   - "!starlette_bokeh_server"
-  - "!starlette_bokeh_server_dist/asgi/asgi.app"
+  - "!starlette_bokeh_server_dist/asgi.app"
 compression: "maximum"
 forceCodeSigning: false
 win:
@@ -18,3 +18,21 @@ nsis:
 portable:
   artifactName: "${productName}.exe"
   useZip: true
+
+mac:
+  category: "public.app-category.finance"
+  target: "dmg"
+  icon: "./icon/icon.icns"
+  darkModeSupport: true
+dmg:
+  artifactName: "${productName}.dmg"
+  background: "./icon/dmg_background.tiff"
+  title: "Install ${productName}"
+  icon: "./icon/icon.icns"
+  contents:
+    - x: 100
+      y: 130
+    - x: 400
+      y: 130
+      type: "link"
+      path: "/Applications"

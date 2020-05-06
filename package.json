@@ -21,8 +21,5 @@
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
     "png-to-ico": "^2.1.0"
-  },
-  "config": {
-    "forge": "./forge.config.js"
   }
 }
