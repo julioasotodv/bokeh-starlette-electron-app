@@ -1,0 +1,39 @@
+appId: "com.julio.miapp"
+productName: "Pruebilla de nombre de app"
+asar: false
+files:
+  - "**/*"
+  - "!starlette_bokeh_server"
+  - "!starlette_bokeh_server_dist/asgi.app"
+compression: "maximum"
+forceCodeSigning: false
+
+win:
+  target: "portable"
+  icon: "./icon/icon.ico"
+nsis:
+  #installerIcon: "./icon/icon.ico"
+  #installerHeaderIcon: "./icon/icon.ico"
+  createDesktopShortcut: false
+  createStartMenuShortcut: false
+portable:
+  artifactName: "${productName}.exe"
+  useZip: true
+
+mac:
+  category: "public.app-category.finance"
+  target: "dmg"
+  icon: "./icon/icon.icns"
+  darkModeSupport: true
+dmg:
+  artifactName: "${productName}.dmg"
+  background: "./icon/dmg_background.tiff"
+  title: "Install ${productName}"
+  icon: "./icon/icon.icns"
+  contents:
+    - x: 100
+      y: 130
+    - x: 400
+      y: 130
+      type: "link"
+      path: "/Applications"
