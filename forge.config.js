@@ -25,7 +25,11 @@ module.exports = {
         {
           name: "@electron-forge/maker-squirrel",
           config: {
-            name: "dashboard"
+            name: "dashboard",
+            setupExe: "dashboard.exe",
+            noMSI: true,
+            setupIcon: icon_path,
+            loadingGif: "./icon/loading_icon.gif"
           }
         },
         {

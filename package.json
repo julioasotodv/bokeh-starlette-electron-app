@@ -1,6 +1,8 @@
 {
   "name": "dashboard",
   "version": "0.0.1",
+  "author": "Julio Antonio Soto",
+  "description": "App description",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
