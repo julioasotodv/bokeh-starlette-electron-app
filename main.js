@@ -3,6 +3,14 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 
+// Avoid flashing the user when launching from
+// Squirrel (Windows only):
+if (process.platform === "win32"){
+  if (require('electron-squirrel-startup')) {
+    return app.quit()
+  }
+}
+
 app.allowRendererProcessReuse = true // As false is deprecated. However, this
                                      // doesn't help with the "white flash" shown
                                      // before the bokeh document, as it only
