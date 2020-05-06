@@ -5,26 +5,21 @@
   "description": "App description",
   "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "electron": "electron .",
+    "prebuild": "node before_build.js",
+    "package": "electron-builder dist",
+    "dist": "npm run prebuild && npm run package"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "bootstrap": "^4.4.1",
-    "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "portfinder": "^1.0.26"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.51",
-    "@electron-forge/maker-deb": "^6.0.0-beta.51",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.51",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.51",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
-    "@electron-forge/maker-zip": "^6.0.0-beta.51",
     "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
     "png-to-ico": "^2.1.0"
   },
   "config": {

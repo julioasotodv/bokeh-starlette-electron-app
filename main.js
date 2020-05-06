@@ -3,14 +3,6 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 
-// Avoid flashing the user when launching from
-// Squirrel (Windows only):
-if (process.platform === "win32"){
-  if (require('electron-squirrel-startup')) {
-    return app.quit()
-  }
-}
-
 app.allowRendererProcessReuse = true // As false is deprecated. However, this
                                      // doesn't help with the "white flash" shown
                                      // before the bokeh document, as it only
@@ -42,7 +34,7 @@ const createWindow = () => {
     protocol: 'file:',
     slashes: true
   }))
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   mainWindow.uvicorn_server_port = uvicornPort;
   mainWindow.bokeh_server_port = bokehPort;
   mainWindow.setMenu(null);

@@ -1,0 +1,20 @@
+appId: "com.julio.miapp"
+productName: "Pruebilla de nombre de app"
+asar: false
+files:
+  - "**/*"
+  - "!starlette_bokeh_server"
+  - "!starlette_bokeh_server_dist/asgi/asgi.app"
+compression: "maximum"
+forceCodeSigning: false
+win:
+  target: "portable"
+  icon: "./icon/icon.ico"
+nsis:
+  #installerIcon: "./icon/icon.ico"
+  #installerHeaderIcon: "./icon/icon.ico"
+  createDesktopShortcut: false
+  createStartMenuShortcut: false
+portable:
+  artifactName: "${productName}.exe"
+  useZip: true
