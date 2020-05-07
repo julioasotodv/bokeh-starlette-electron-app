@@ -1,10 +1,12 @@
 appId: "com.julio.miapp"
-productName: "Pruebilla de nombre de app"
+productName: "My awesome Panel dashboard"
 asar: false
 files:
   - "**/*"
   - "!starlette_bokeh_server"
   - "!starlette_bokeh_server_dist/asgi.app"
+  - "!.git"
+  - "!.vscode"
 compression: "maximum"
 forceCodeSigning: false
 
