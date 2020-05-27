@@ -7,8 +7,9 @@
   "scripts": {
     "electron": "electron .",
     "prebuild": "node before_build.js",
+    "compile_py": "cd starlette_bokeh_server && pyinstaller_script",
     "package": "electron-builder dist",
-    "dist": "npm run prebuild && npm run package"
+    "dist": "npm run prebuild && npm run compile_py && npm run package"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
