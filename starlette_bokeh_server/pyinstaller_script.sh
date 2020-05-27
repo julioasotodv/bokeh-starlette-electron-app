@@ -4,9 +4,7 @@ rm -rf asgi.spec
 rm -rf build
 rm -rf ../starlette_bokeh_server_dist
 
-#--onefile \
 pyinstaller \
-  --windowed \
   --onedir \
   --additional-hooks-dir pyinstaller_extra_hooks \
   --hidden-import starlette.applications \
