@@ -3,7 +3,6 @@ del asgi.spec
 rmdir /s /q ..\starlette_bokeh_server_dist
 
 pyinstaller ^
-  --windowed ^
   --onedir ^
   --additional-hooks-dir pyinstaller_extra_hooks ^
   --hidden-import starlette.applications ^
